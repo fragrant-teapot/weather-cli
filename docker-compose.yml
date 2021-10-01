@@ -2,6 +2,12 @@ version: '3.7'
 
 services:
 
+  composer:
+    image: composer:2.1.8
+    volumes:
+      - ./:/root/weather
+    working_dir: /root/weather
+
   php:
     image: php:8.0.11-cli-bullseye
     command:

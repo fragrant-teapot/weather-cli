@@ -7,14 +7,18 @@ Simple php application printing current weather in a given city
 ```bash
 ./weather <cityName>
 
-./weather Berlin
+./weather Berlin  
 ```
 
 ## Setup
 
-1. `docker-compose up -d`
-2. `docker-compose run php ./setup`
-3. `docker-compose run php ./weather Brussels`
+1. clone this repo
+2. `cd weather-cli`
+3. `docker-compose up -d`
+4. `docker-compose run composer composer install"`
+5. `docker-compose run php ./setup`
+6. `sudo chown -R ${USER}:${USER} ./`
+7. `docker-compose run php ./weather Brussels`
 
 ## Sources
 

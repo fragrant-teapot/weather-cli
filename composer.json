@@ -21,7 +21,6 @@
   "require": {
     "php": ">=8.0",
     "ext-curl": "*",
-    "ext-zlib": "*",
     "league/climate": "^3.7"
   },
   "require-dev": {
