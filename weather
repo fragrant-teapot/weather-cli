@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+include_once __DIR__ . '/vendor/autoload.php';
+
+use App\Api\OWMWeatherApi;
+use App\Api\Parser\OWMWeatherApiParser;
+use App\Weather;
+use League\CLImate\CLImate;
+
+$cli = new Climate();
+
+if (!file_exists(__DIR__ . '/var/settings')) {
+    $cli->error('Please execute setup before using the app');
+    return 1;
+}
+
+$weather = new Weather(
+        new OWMWeatherApi(
+            unserialize(file_get_contents(__DIR__ . '/var/settings'))['api_token'],
+            new OWMWeatherApiParser()
+        )
+);
+
+if (!empty($argv[1])) {
+    $cli->info($weather->getWeatherSummaryForCityName($argv[1]));
+} else {
+    $cli->info('Please pass city name as parameter ex. `weather Zagreb`');
+}
+
+return 0;
+

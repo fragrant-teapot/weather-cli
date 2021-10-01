@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+include_once __DIR__ . '/vendor/autoload.php';
+
+use League\CLImate\CLImate;
+
+
+$settings = [
+    'api_token' => ''
+];
+
+$climate = new CLImate();
+
+setSettings($climate);
+
+exit(0);
+
+function setSettings(CLImate $climate): void
+{
+    $input = $climate->password('Please enter Open Weather Map API key:');
+    $settings['api_token'] = $input->prompt();
+
+    file_put_contents(__DIR__ . '/var/settings', serialize($settings));
+
+}

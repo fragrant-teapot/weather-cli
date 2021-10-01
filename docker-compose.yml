@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+
+  php:
+    image: php:8.0.11-cli-bullseye
+    command:
+      - ./weather Warsaw
+    volumes:
+      - ./:/root/weather
+    working_dir: /root/weather
+
