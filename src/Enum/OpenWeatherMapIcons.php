@@ -6,15 +6,15 @@ namespace App\Enum;
 
 class OpenWeatherMapIcons //todo rewrite with proper enum once 8.1 gets released...
 {
-    private const FEW_CLOUDS = '⛅';
-    private const SCATTERED_CLOUDS = '🌥️';
-    private const BROKEN_CLOUDS = '🌥️';
-    private const SHOWER_RAIN = '🌧️';
-    private const RAIN = '🌧️';
-    private const THUNDERSTORM = '⛈️';
-    private const SNOW = '🌨️';
-    private const MIST = '🌫️';
-    private const CLEAR_SKY = '☀️';
+    public const FEW_CLOUDS = '⛅';
+    public const SCATTERED_CLOUDS = '🌥️';
+    public const BROKEN_CLOUDS = '🌥️';
+    public const SHOWER_RAIN = '🌧️';
+    public const RAIN = '🌧️';
+    public const THUNDERSTORM = '⛈️';
+    public const SNOW = '🌨️';
+    public const MIST = '🌫️';
+    public const CLEAR_SKY = '☀️';
 
     private const EMOJI_TABLE = [
         '11d' => self::THUNDERSTORM,

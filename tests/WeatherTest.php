@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 final class WeatherTest extends TestCase
 {
-
     public function weatherProvider(): array
     {
         return [

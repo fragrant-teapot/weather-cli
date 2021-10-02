@@ -6,16 +6,16 @@ namespace App\Model;
 
 use App\Enum\OpenWeatherMapIcons;
 
-class WeatherApiResponse
+class WeatherApiResponse //todo move getters to readonly properties once php8.1 comes around
 {
     private const K_WATER_FREEZE = 273.15;
 
-    //todo move getters to readonly properties once php8.1 comes around
     public function __construct(
         private float $temperature,
         private string $icon,
         private string $description
-    ) {}
+    ) {
+    }
 
     public function getTemperatureKelvin(): float
     {

@@ -7,7 +7,6 @@ include_once __DIR__ . '/vendor/autoload.php';
 
 use League\CLImate\CLImate;
 
-
 $settings = [
     'api_token' => ''
 ];
@@ -24,5 +23,4 @@ function setSettings(CLImate $climate): void
     $settings['api_token'] = $input->prompt();
 
     file_put_contents(__DIR__ . '/var/settings', serialize($settings));
-
 }

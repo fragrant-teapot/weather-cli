@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 final class OWMWeatherApiTest extends TestCase
 {
-
     public function test__construct(): void
     {
         $mock = $this->createMock(ApiParserInterface::class);

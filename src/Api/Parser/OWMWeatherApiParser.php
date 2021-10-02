@@ -8,7 +8,6 @@ use App\Model\WeatherApiResponse;
 
 class OWMWeatherApiParser implements ApiParserInterface
 {
-
     public function parse(string $response): WeatherApiResponse
     {
         $response = json_decode($response, true, JSON_THROW_ON_ERROR);

@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Model\WeatherApiResponse;
-use JetBrains\PhpStorm\Pure;
 use PHPUnit\Framework\TestCase;
 
 final class WeatherApiResponseTest extends TestCase
 {
-    #[Pure]
     public function weatherProvider(): array
     {
         return [
@@ -31,8 +29,7 @@ final class WeatherApiResponseTest extends TestCase
         int $windDeg,
         string $icon,
         string $description
-    ): void
-    {
+    ): void {
         $response = new WeatherApiResponse(
             $temperature,
             $icon,
