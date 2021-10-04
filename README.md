@@ -16,7 +16,7 @@ Simple php application printing current weather in a given city
 2. `cd weather-cli`
 3. `docker-compose up -d`
 4. `docker-compose run composer composer install"`
-5. `docker-compose run php ./setup`
+5. `docker-compose run php ./setup` You will be asked for Open Weather Map API key, generate one [here](https://home.openweathermap.org/api_keys)
 6. `sudo chown -R ${USER}:${USER} ./`
 7. `docker-compose run php ./weather Brussels`
 
