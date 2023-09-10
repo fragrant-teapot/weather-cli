@@ -5,27 +5,43 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Api\WeatherApiInterface;
+use App\Enum\OpenWeatherMapIcon;
 use App\Model\WeatherApiResponse;
 use App\Weather;
 use PHPUnit\Framework\TestCase;
 
 final class WeatherTest extends TestCase
 {
-    public function weatherProvider(): array
+    public static function weatherProvider(): array
     {
         return [
             [
                 'Warsaw',
-                'few clouds ⛅, 15 degrees celsius'
+                'few clouds 🌤️, 14 degrees celsius',
+                new WeatherApiResponse(
+                    288.0,
+                    OpenWeatherMapIcon::FEW_CLOUDS_DAY,
+                    'few clouds'
+                )
             ],
             [
                 'Berlin',
-                'clear sky ☀️, 17 degrees celsius'
+                'clear sky ☀️, 16 degrees celsius',
+                new WeatherApiResponse(
+                    290.0,
+                    OpenWeatherMapIcon::CLEAR_SKY_DAY,
+                    'clear sky'
+                )
             ],
             [
                 'Zagreb',
-                'overcast clouds 🌥️, 16 degrees celsius'
-            ]
+                'overcast clouds 🌥️, 15 degrees celsius',
+                new WeatherApiResponse(
+                    289.0,
+                    OpenWeatherMapIcon::BROKEN_CLOUDS_DAY,
+                    'overcast clouds'
+                )
+            ],
         ];
     }
 
@@ -34,18 +50,19 @@ final class WeatherTest extends TestCase
     {
         $mock = $this->createMock(WeatherApiInterface::class);
 
-        $this->assertObjectHasAttribute('api', new Weather($mock));
+        $this->assertObjectHasProperty('api', new Weather($mock));
     }
 
     /**
      * @dataProvider weatherProvider
      */
-    public function testGetWeatherSummaryForCityName(string $name, string $return): void
-    {
+    public function testGetWeatherSummaryForCityName(
+        string $name,
+        string $return,
+        WeatherApiResponse $weatherApiResponse
+    ): void {
         $apiMock = $this->createMock(WeatherApiInterface::class);
-        $responseMock = $this->createMock(WeatherApiResponse::class);
-        $apiMock->method('getCurrentWeatherForCity')->willReturn($responseMock);
-        $responseMock->method('getSummary')->willReturn($return);
+        $apiMock->method('getCurrentWeatherForCity')->willReturn($weatherApiResponse);
 
         $weather = new Weather($apiMock);
 

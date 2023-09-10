@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use App\Enum\OpenWeatherMapIcon;
 use App\Model\WeatherApiResponse;
 use PHPUnit\Framework\TestCase;
 
 final class WeatherApiResponseTest extends TestCase
 {
-    public function weatherProvider(): array
+    public static function weatherProvider(): array
     {
         return [
             [100.23, 1.79, 0, '50d', 'fog'],
@@ -32,7 +33,7 @@ final class WeatherApiResponseTest extends TestCase
     ): void {
         $response = new WeatherApiResponse(
             $temperature,
-            $icon,
+            OpenWeatherMapIcon::tryFrom($icon),
             $description
         );
 

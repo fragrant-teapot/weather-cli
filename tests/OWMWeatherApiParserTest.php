@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Api\Parser\OWMWeatherApiParser;
+use App\Enum\OpenWeatherMapIcon;
 use App\Model\WeatherApiResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -12,7 +13,7 @@ final class OWMWeatherApiParserTest extends TestCase
 {
     private const OWM_RESPONSE_JSON = __DIR__ . '/TestData/cities_weather.json';
 
-    public function weatherProvider(): array
+    public static function weatherProvider(): array
     {
         $data = json_decode(file_get_contents(self::OWM_RESPONSE_JSON), true, JSON_THROW_ON_ERROR);
 
@@ -40,7 +41,7 @@ final class OWMWeatherApiParserTest extends TestCase
     ): void {
         $response = new WeatherApiResponse(
             $temperature,
-            $icon,
+            OpenWeatherMapIcon::tryFrom($icon),
             $description
         );
 

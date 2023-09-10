@@ -4,22 +4,17 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use App\Enum\OpenWeatherMapIcons;
+use App\Enum\OpenWeatherMapIcon;
 
-class WeatherApiResponse //todo move getters to readonly properties once php8.1 comes around
+readonly class WeatherApiResponse
 {
     private const K_WATER_FREEZE = 273.15;
 
     public function __construct(
-        private float $temperature,
-        private string $icon,
-        private string $description
+        public float $temperature,
+        public OpenWeatherMapIcon $icon,
+        public string $description
     ) {
-    }
-
-    public function getTemperatureKelvin(): float
-    {
-        return $this->temperature;
     }
 
     public function getTemperatureCelsius(): float
@@ -27,21 +22,12 @@ class WeatherApiResponse //todo move getters to readonly properties once php8.1 
         return $this->temperature - self::K_WATER_FREEZE;
     }
 
-    public function getIcon(): string
-    {
-        return $this->icon;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
     public function getSummary(): string
     {
-        return sprintf('%s %s, %d degrees celsius',
-            $this->getDescription(),
-            OpenWeatherMapIcons::getEmojiForWeatherCode($this->getIcon()),
+        return sprintf(
+            '%s %s, %d degrees celsius',
+            $this->description,
+            $this->icon->getEmojiForWeatherCode(),
             $this->getTemperatureCelsius()
         );
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api\Parser;
 
+use App\Enum\OpenWeatherMapIcon;
 use App\Model\WeatherApiResponse;
 
 class OWMWeatherApiParser implements ApiParserInterface
@@ -14,7 +15,7 @@ class OWMWeatherApiParser implements ApiParserInterface
 
         return new WeatherApiResponse(
             $response['main']['temp'],
-            $response['weather'][0]['icon'],
+            OpenWeatherMapIcon::tryFrom($response['weather'][0]['icon']),
             $response['weather'][0]['description']
         );
     }

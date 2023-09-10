@@ -6,6 +6,7 @@ namespace Tests;
 
 use App\Api\OWMWeatherApi;
 use App\Api\Parser\ApiParserInterface;
+use App\Enum\OpenWeatherMapIcon;
 use App\Model\WeatherApiResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -16,16 +17,21 @@ final class OWMWeatherApiTest extends TestCase
         $mock = $this->createMock(ApiParserInterface::class);
 
         $api = new OWMWeatherApi('loremipsum', $mock);
-        $this->assertObjectHasAttribute('parser', $api);
+        $this->assertObjectHasProperty('parser', $api);
     }
 
     public function testGetCurrentWeatherForCity(): void
     {
         $mock = $this->createMock(ApiParserInterface::class);
-        $responseMock = $this->createMock(WeatherApiResponse::class);
-        $mock->method('parse')->willReturn($responseMock);
+        $response = new WeatherApiResponse(
+            1337.0,
+            OpenWeatherMapIcon::CLEAR_SKY_DAY,
+            'tad warm'
+        );
+
+        $mock->method('parse')->willReturn($response);
 
         $api = new OWMWeatherApi('loremipsum', $mock);
-        $this->assertSame($responseMock, $api->getCurrentWeatherForCity('loremipsum'));
+        $this->assertSame($response, $api->getCurrentWeatherForCity('loremipsum'));
     }
 }
