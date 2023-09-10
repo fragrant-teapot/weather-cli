@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,9 @@ jobs:
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
         with:
+          php_extensions: xdebug
           bootstrap: vendor/autoload.php
           configuration: phpunit.xml
           args: --coverage-text
+        env:
+          XDEBUG_MODE: coverage
